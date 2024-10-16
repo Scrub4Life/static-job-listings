@@ -7,19 +7,20 @@ const Listing = () => {
   const [itemArr, setItemArr] = useState([]);
   const [displayArr, setDisplayArr] = useState(false);
   const [selectedValue, setSelectedValue] = useState("all");
+  const [keyValue, setKeyValue] = useState("");
 
-  // 
-  document.addEventListener("click", (event) => {
-    console.dir(event.target);
-  });
-
+  // document.addEventListener("click", (event) => {
+  //   console.dir(event.target);
+  // });
 
   // Event handler for adding text to array
-  const handleAddItem = (event) => {
-    const clickedItem = event.target.textContent;
+  const handleAddItem = (e) => {
+    const clickedItem = e.target.textContent;
     setItemArr((prevArr) => [...prevArr, clickedItem]);
-
     setSelectedValue(clickedItem);
+
+    const keyType = e.target.id;
+    setKeyValue(() => keyType);
   };
 
   // Event handler for deleting an array item
@@ -33,18 +34,45 @@ const Listing = () => {
     setSelectedValue("all");
   };
 
-  const filteredItemArr =
-    // 1
-    selectedValue === "all"
-      ? data
-      : selectedValue === "all"
-      ? data.filter((d) => d.position === selectedValue)
-      : data.filter((d) => d.role === selectedValue);
+const filteredItemArr =
+  selectedValue === "all"
+    ? data
+    : data.filter((d) => {
+        const value = d[keyValue];
+        if (Array.isArray(value)) {
+          return value.includes(selectedValue);
+        } else {
+          return value === selectedValue;
+        }
+      });
+
+
+  // const filteredItemArr =
+  //   selectedValue === "all"
+  //     ? data
+  //     : data.filter((d) => d[keyValue] === selectedValue);
+
+  // const filteredItemArr =
+  //   selectedValue === "all"
+  //     ? data
+  //     : data.filter((d) => d[keyValue][0] === selectedValue);
 
   // useEfftect
   useEffect(() => {
     setDisplayArr(itemArr.length > 0);
   }, [itemArr]);
+
+  // dev testing
+  useEffect(() => {
+    
+    console.log("************************");
+    console.log(`keyValue: ${keyValue}`)
+
+    console.log(`selectedValue: ${selectedValue}`);
+
+
+    
+  }, [keyValue])
 
   return (
     <>
@@ -81,7 +109,6 @@ const Listing = () => {
           </p>
         </div>
       )}
-
       {/*  */}
       <div className="flex flex-col items-center ">
         {filteredItemArr.map((listing) => {
@@ -98,5 +125,4 @@ const Listing = () => {
     </>
   );
 };
-
 export default Listing;

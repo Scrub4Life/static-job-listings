@@ -35,7 +35,9 @@ const Card = ({
           </div>
           {/* position */}
           <div className="font-bold cursor-pointer my-1 hover:text-ddc">
-            <p onClick={handleAddText}>{position}</p>
+            <p onClick={handleAddText}>
+              {position}
+            </p>
           </div>
           {/* postedAt, contract, location */}
           <div className="text-dgc flex text-sm font-semibold">
@@ -47,12 +49,14 @@ const Card = ({
         {/* role, level, lang, tools */}
         <div className="ml-auto text-ddc font-semibold flex">
           <p
+          id="role"
             className="mx-1 my-0 bg-vd bg-lgc1 rounded font-bold p-1 cursor-pointer text-sm hover:text-lgc hover:bg-ddc"
             onClick={handleAddText}
           >
             {role}
           </p>
           <p
+          id="level"
             className="mx-1 my-0 bg-vd bg-lgc1 rounded p-1 cursor-pointer font-bold text-sm hover:text-lgc hover:bg-ddc"
             onClick={handleAddText}
           >
@@ -60,32 +64,34 @@ const Card = ({
           </p>
           <p className="">
             {languages &&
-              languages.map((lang, i) => {
+              languages.map((languages, i) => {
                 return (
                   <p
-                    key={lang[i]}
-                    className={`inline-block mx-1 my-0 bg-lgc1 rounded p-1 cursor-pointer font-bold text-sm hover:text-lgc hover:bg-ddc ${
-                      i === languages.length - 1 ? "mr-0" : ""
+                    key={languages[i]}
+                    id="languages"
+                    className={`inline-block mx-1 my-0 bg-lgc1 rounded p-1 cursor-pointer font-bold text-sm hover:text-lgc hover:bg-ddc 
+                    ${i === languages.length - 1 ? "mr-0" : ""
                     } `}
                     onClick={handleAddText}
                   >
-                    {lang}
+                    {languages}
                   </p>
                 );
               })}
           </p>
           <p className="">
             {tools &&
-              tools.map((tool, i) => {
+              tools.map((tools, i) => {
                 return (
                   <p
-                    key={tool[i]}
-                    className={`inline-block my-0 bg-lgc1 rounded p-1 cursor-pointer font-bold text-sm hover:text-lgc hover:bg-ddc mx-1 ${
+                    key={tools[i]}
+                    id="tools"
+                    className={`inline-block my-0 bg-lgc1 rounded p-1 cursor-pointer font-bold text-sm hover:text-lgc hover:bg-ddc mx-1  ${
                       i === tools.length - 1 ? "mr-0" : ""
                     }`}
                     onClick={handleAddText}
                   >
-                    {tool}
+                    {tools}
                   </p>
                 );
               })}
