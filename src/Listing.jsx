@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import data from "../data.json";
 import Card from "./Card";
-import removeIcon from "./images/icon-remove.svg";
+import removeIcon from "../public/images/icon-remove.svg";
 
 const Listing = () => {
   const [itemArr, setItemArr] = useState([]);
@@ -34,18 +34,17 @@ const Listing = () => {
     setSelectedValue("all");
   };
 
-const filteredItemArr =
-  selectedValue === "all"
-    ? data
-    : data.filter((d) => {
-        const value = d[keyValue];
-        if (Array.isArray(value)) {
-          return value.includes(selectedValue);
-        } else {
-          return value === selectedValue;
-        }
-      });
-
+  const filteredItemArr =
+    selectedValue === "all"
+      ? data
+      : data.filter((d) => {
+          const value = d[keyValue];
+          if (Array.isArray(value)) {
+            return value.includes(selectedValue);
+          } else {
+            return value === selectedValue;
+          }
+        });
 
   // const filteredItemArr =
   //   selectedValue === "all"
@@ -64,15 +63,11 @@ const filteredItemArr =
 
   // dev testing
   useEffect(() => {
-    
     console.log("************************");
-    console.log(`keyValue: ${keyValue}`)
+    console.log(`keyValue: ${keyValue}`);
 
     console.log(`selectedValue: ${selectedValue}`);
-
-
-    
-  }, [keyValue])
+  }, [keyValue]);
 
   return (
     <>
